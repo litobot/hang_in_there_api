@@ -76,13 +76,13 @@ RSpec.describe "Posters Endpoints" do
         img_url: "https://i.pinimg.com/736x/66/cc/cb/66cccbf49897ad18d05661f3dfe7d846.jpg"
       ).id
 
-      get "/api/v1/posters/{:id}"
+      get "/api/v1/posters/#{id}"
 
       expect(response).to be_successful
 
       poster = JSON.parse(response.body, symbolize_names: true)
       
-      expect(posters.count).to eq(1)
+      # expect(poster.count).to eq(1) // Do we need this in the show test 
 
       expect(poster).to have_key(:id)
       expect(poster[:id]).to be_an(Integer)
