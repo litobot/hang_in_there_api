@@ -10,7 +10,7 @@
 
 
 
-# Posters.delete_all  -->  Are we going to want this?
+Poster.delete_all
 
 Poster.create(
   name: "FAILURE",
