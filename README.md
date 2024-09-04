@@ -22,5 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-Change added to push dev branch up.
