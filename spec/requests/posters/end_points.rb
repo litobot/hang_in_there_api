@@ -2,9 +2,8 @@ require "rails_helper"
 
 RSpec.describe "Posters Endpoints" do
   describe "retrieval actions" do
-    it "can retrieve ALL posters (index)" do
-
-      Poster.create(
+    before(:each) do
+      Poster.create!(
         name: "FAILURE",
         description: "Dreams don't work unless you do. And even then, they might not.",
         price: 75.00,
@@ -13,7 +12,7 @@ RSpec.describe "Posters Endpoints" do
         img_url: "https://img.freepik.com/free-photo/black-white-image-sad-woman_23-2151338370.jpg"
       )
 
-      Poster.create(
+      Poster.create!(
         name: "DISAPPOINTMENT",
         description: "Expect the worst, and you'll never be disappointed.",
         price: 60.00,
@@ -22,7 +21,7 @@ RSpec.describe "Posters Endpoints" do
         img_url: "https://as1.ftcdn.net/v2/jpg/02/32/41/30/1000_F_232413095_8eEpb7R3iCfJjS8acs7u6U3Wkt2YPxoO.jpg"
       )
 
-      Poster.create(
+      Poster.create!(
         name: "REGRET",
         description: "Hard work rarely pays off.",
         price: 89.00,
@@ -30,8 +29,11 @@ RSpec.describe "Posters Endpoints" do
         vintage: true,
         img_url: "https://www.myclickmagazine.com/wp-content/uploads/2016/06/black-and-white-landscape-photograph-by-Jennifer-Green.jpg"
       )
+    end
 
-      get "api/v1/posters"
+    it "can retrieve ALL posters (index)" do
+
+      get "/api/v1/posters"
 
       expect(response).to be_successful
 
@@ -46,19 +48,19 @@ RSpec.describe "Posters Endpoints" do
         expect(poster[:name]).to be_a(String)
   
         expect(poster).to have_key(:description)
-        expect(poster[:description]).to be_an(String)
+        expect(poster[:description]).to be_a(String)
   
         expect(poster).to have_key(:price)
-        expect(poster[:price]).to be_an(Float)
+        expect(poster[:price]).to be_a(Float)
         
         expect(poster).to have_key(:year)
         expect(poster[:year]).to be_an(Integer)
         
         expect(poster).to have_key(:vintage)
-        expect(poster[:vintage]).to be_an(Boolean)
+        expect(poster[:vintage]).to be_in([true, false])
         
         expect(poster).to have_key(:img_url)
-        expect(poster[:img_url]).to be_an(String)
+        expect(poster[:img_url]).to be_a(String)
       end
     end
   end
