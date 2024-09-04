@@ -38,6 +38,7 @@ RSpec.describe "Posters Endpoints" do
       expect(response).to be_successful
 
       posters = JSON.parse(response.body, symbolize_names: true)
+      
       expect(posters.count).to eq(3)
 
       posters.each do |poster|
@@ -62,6 +63,47 @@ RSpec.describe "Posters Endpoints" do
         expect(poster).to have_key(:img_url)
         expect(poster[:img_url]).to be_a(String)
       end
+    end
+    
+    it "can return exactly one poster (show)" do
+
+      id = Poster.create!(
+        name: "DESPAIR",
+        description: "The light at the end of the tunnel might be an oncoming train.",
+        price: 70.00,
+        year: 2017,
+        vintage: true,
+        img_url: "https://i.pinimg.com/736x/66/cc/cb/66cccbf49897ad18d05661f3dfe7d846.jpg"
+      ).id
+
+      get "/api/v1/posters/{:id}"
+
+      expect(response).to be_successful
+
+      poster = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(posters.count).to eq(1)
+
+      expect(poster).to have_key(:id)
+      expect(poster[:id]).to be_an(Integer)
+
+      expect(poster).to have_key(:name)
+      expect(poster[:name]).to be_a(String)
+
+      expect(poster).to have_key(:description)
+      expect(poster[:description]).to be_a(String)
+
+      expect(poster).to have_key(:price)
+      expect(poster[:price]).to be_a(Float)
+      
+      expect(poster).to have_key(:year)
+      expect(poster[:year]).to be_an(Integer)
+      
+      expect(poster).to have_key(:vintage)
+      expect(poster[:vintage]).to be_in([true, false])
+      
+      expect(poster).to have_key(:img_url)
+      expect(poster[:img_url]).to be_a(String)
     end
   end
 end
