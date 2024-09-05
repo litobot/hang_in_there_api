@@ -198,7 +198,7 @@
           null,
           null,
           null,
-          1,
+          null,
           1,
           null
         ]
@@ -216,8 +216,27 @@
           1,
           null
         ]
+      },
+      "/Users/litobot/turing/se_mod2/projects/hang_in_there_api/app/controllers/api/v1/posters_controller.rb": {
+        "lines": [
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/litobot/turing/se_mod2/projects/hang_in_there_api/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1725492883
+    "timestamp": 1725494487
   }
 }
