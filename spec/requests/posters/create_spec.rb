@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe do
-  describe "creating a new poster" do
-    it "can create a new poster" do
+RSpec.describe "Posters Endpoints" do
+  describe "POST request action" do
+    it "creates a new poster" do
       poster_params = {
         name: "James",
         description: "The Giant Peach",

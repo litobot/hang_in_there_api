@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe do
-  describe "Updating a poster" do
-    it "can update a poster" do
+RSpec.describe "Posters Endpoints"do
+  describe "PATCH request action" do
+    it "updates an existing poster" do
       id = Poster.create(
         name: "Why us?", 
         description: "Why not you?", 
