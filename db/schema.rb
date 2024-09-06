@@ -24,16 +24,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_202554) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "posters", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.float "price"
-    t.integer "year"
-    t.boolean "vintage"
-    t.string "img_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 end
