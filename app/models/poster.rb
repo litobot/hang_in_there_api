@@ -1,4 +1,11 @@
 class Poster < ApplicationRecord
+  def self.filtered_and_sorted(params)
+    posters = Poster.all
+    posters = filter(posters, params)
+    posters = sort(posters, params)
+    posters
+  end
+
   def self.sort(posters, params)
     if params[:sort] == "asc"
       posters.order(:created_at)
