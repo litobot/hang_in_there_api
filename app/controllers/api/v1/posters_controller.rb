@@ -2,8 +2,7 @@ class Api::V1::PostersController < ApplicationController
   def index
     posters = Poster.all
     posters = Poster.sort(posters, params)
-    posters = Poster.filter(posters,params[:name])
-
+    posters = Poster.filter(posters, params)
 
     options = {}
     options[:meta] = {count: posters.count}
