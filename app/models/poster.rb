@@ -8,4 +8,12 @@ class Poster < ApplicationRecord
       posters
     end
   end
+
+  def self.filter(posters, name)
+    if name.present?
+      posters.where('name ILIKE ?', "%#{name}%")
+    else
+      posters
+    end
+  end
 end
