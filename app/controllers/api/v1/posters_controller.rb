@@ -30,7 +30,7 @@ class Api::V1::PostersController < ApplicationController
 
   private
 
-  def poster_params # This is how we define poster_params - otherwise it's undefined
+  def poster_params
     params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
   end
 end

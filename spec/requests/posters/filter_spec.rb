@@ -35,11 +35,6 @@ RSpec.describe "Filtering query methods" do
     )
   end
 
-# Must be returned in case-insensitive alphabetical order
-# Returns poster objects whose names contain a query string ("ter")
-  # => would return poster objects with names "DISASTER" & "TERRIBLE"
-
-
   it "returns any posters containing case insensitive text in query" do
     
     get "/api/v1/posters"
@@ -60,5 +55,22 @@ RSpec.describe "Filtering query methods" do
 
     expect(posters[0][:attributes][:name]).to eq("DISAStER")
     expect(posters[1][:attributes][:name]).to eq("TERRIBLE")
+  end
+
+  it "min price" do
+    get "/api/v1/posters?min_price=75"
+    
+    expect(response).to be_successful
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(posters.count).to eq(2)
+
+    poster_names = posters.map { |poster| poster[:attributes][:name] }
+    expect(poster_names).to include("DISAStER", "REGRET")
+
+    poster_prices = posters.map { |poster| poster[:attributes][:price] }
+    poster_prices.each do |price|
+      expect(price).to be >= 75.00
+    end
   end
 end

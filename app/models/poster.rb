@@ -10,6 +10,18 @@ class Poster < ApplicationRecord
   end
 
   def self.filter(posters, params)
-      posters.where('name ILIKE ?', "%#{params[:name]}%").order(:name)
+    if params[:name].present?
+      posters = posters.where('name ILIKE ?', "%#{params[:name]}%").order(:name)
+    end
+
+    if params[:min_price].present?
+      posters = posters.where('price >= ?', params[:min_price])
+    end
+
+    if params[:max_price].present?
+      posters = posters.where('price <= ?', params[:max_price])
+    end
+
+    posters
   end
 end
