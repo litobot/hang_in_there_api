@@ -20,7 +20,7 @@ class Api::V1::PostersController < ApplicationController
   end
 
   def destroy
-    render json: Poster.delete(params[:id])
+    render json: Poster.destroy(params[:id]), status: 204
   end
 
   private
