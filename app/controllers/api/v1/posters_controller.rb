@@ -1,7 +1,7 @@
 class Api::V1::PostersController < ApplicationController
   def index
-    posters = Poster.all   # We're calling the poster model (singular)
-    render json: PosterSerializer.new(posters)
+    posters = Poster.filtered_and_sorted(params)
+    render json: PosterSerializer.new(posters, meta: { count: posters.count })
   end
 
   def show
@@ -20,12 +20,12 @@ class Api::V1::PostersController < ApplicationController
   end
 
   def destroy
-    render json: Poster.delete(params[:id])
+    render json: Poster.destroy(params[:id]), status: 204
   end
 
   private
 
-  def poster_params # This is how we define poster_params - otherwise it's undefined
+  def poster_params
     params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
   end
 end
