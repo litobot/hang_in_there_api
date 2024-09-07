@@ -73,4 +73,21 @@ RSpec.describe "Filtering query methods" do
       expect(price).to be >= 75.00
     end
   end
+
+  it "max price" do
+    get "/api/v1/posters?max_price=80"
+    
+    expect(response).to be_successful
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+  
+    expect(posters.count).to eq(2)
+  
+    poster_names = posters.map { |poster| poster[:attributes][:name] }
+    expect(poster_names).to include("DISAStER", "TERRIBLE")
+  
+    poster_prices = posters.map { |poster| poster[:attributes][:price] }
+    poster_prices.each do |price|
+      expect(price).to be <= 80.00
+    end
+  end
 end
