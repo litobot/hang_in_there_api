@@ -41,15 +41,25 @@ RSpec.describe "Filtering query methods" do
 
 
   it "returns any posters containing case insensitive text in query" do
-    get "/api/v1/posters?name=ter"
+    
+    get "/api/v1/posters"
 
     expect(response).to be_successful
 
     posters = JSON.parse(response.body, symbolize_names: true)[:data]
 
-    expect(posters.count).to eq(2)
+    expect(posters.count).to eq(3)
 
-    expect(posters[0].[:attribute][:name] || posters[1].[:attribute][:name]).to eq("DISASTER")
-    expect(posters[0].[:attribute][:name] || posters[1].[:attribute][:name]).to eq("TERRIBLE")
+    get "/api/v1/posters?name=ter"
+
+    expect(response).to be_successful
+
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+    
+    expect(posters.count).to eq(2)
+   
+    expect(posters[0][:attribute][:name]).to eq("DISASTER")
+    expect(posters[1][:attribute][:name]).to eq("TERRIBLE")
+    expect("DISASTER").to appear_before("TERRIBLE")
   end
 end
