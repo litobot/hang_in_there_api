@@ -43,9 +43,7 @@ RSpec.describe "Sort Queries" do
     posters = JSON.parse(response.body, symbolize_names: true)
 
     expect(posters[:data].count).to eq(3)
-
-    # Didn't realize Orderly was allowed
-    # Change to use Orderly
+    
     expect(posters[:data][0][:attributes][:name]).to eq("REGRET")
     expect(posters[:data][1][:attributes][:name]).to eq("DISAPPOINTMENT")
     expect(posters[:data][2][:attributes][:name]).to eq("FAILURE")
