@@ -1,7 +1,7 @@
 class Poster < ApplicationRecord
   def self.sort(posters, params)
     if params[:sort] == "asc"
-      posters.order(created_at: :asc)
+      posters.order(:created_at)
     elsif params[:sort] == "desc"
       posters.order(created_at: :desc)
     else
@@ -9,11 +9,7 @@ class Poster < ApplicationRecord
     end
   end
 
-  def self.filter(posters, name)
-    if name.present?
-      posters.where('name ILIKE ?', "%#{name}%")
-    else
-      posters
-    end
+  def self.filter(posters, params)
+      posters.where('name ILIKE ?', "%#{params[:name]}%").order(:name)
   end
 end

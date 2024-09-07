@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Filtering query methods" do
   before(:each) do
     Poster.create!(
-      name: "DISASTER",
+      name: "DISAStER",
       description: "Dreams don't work unless you do. And even then, they might not.",
       price: 75.00,
       year: 2019,
@@ -57,9 +57,8 @@ RSpec.describe "Filtering query methods" do
     posters = JSON.parse(response.body, symbolize_names: true)[:data]
     
     expect(posters.count).to eq(2)
-   
-    expect(posters[0][:attribute][:name]).to eq("DISASTER")
-    expect(posters[1][:attribute][:name]).to eq("TERRIBLE")
-    expect("DISASTER").to appear_before("TERRIBLE")
+
+    expect(posters[0][:attributes][:name]).to eq("DISAStER")
+    expect(posters[1][:attributes][:name]).to eq("TERRIBLE")
   end
 end
